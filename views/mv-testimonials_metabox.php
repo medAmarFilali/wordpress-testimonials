@@ -1,3 +1,9 @@
+<?php
+    $occupation = get_post_meta( $post->ID, 'mv_testimonials_occupation', true );
+    $company = get_post_meta( $post->ID, 'mv_testimonials_company', true );
+    $user_url = get_post_meta( $post->ID, 'mv_testimonials_user_url', true );
+?>
+
 <table class="form-table mv-testimonials-metabox"> 
     <input type="hidden" name="mv_testimonials_nonce"  value="<?= wp_create_nonce('mv_testimonials_nonce') ?>" >
     <tr>
@@ -10,7 +16,7 @@
                 name="mv_testimonials_occupation" 
                 id="mv_testimonials_occupation" 
                 class="regular-text occupation"
-                value=""
+                value="<?= isset( $occupation ) ? esc_html($occupation) : '' ?>"
             >
         </td>
     </tr>
@@ -24,7 +30,7 @@
                 name="mv_testimonials_company" 
                 id="mv_testimonials_company" 
                 class="regular-text company"
-                value=""
+                value="<?= isset( $company ) ? esc_html($company) : '' ?>"
             >
         </td>
     </tr>
@@ -38,7 +44,7 @@
                 name="mv_testimonials_user_url" 
                 id="mv_testimonials_user_url" 
                 class="regular-text user-url"
-                value=""
+                value="<?= isset( $user_url ) ? esc_url($user_url) : '' ?>"
             >
         </td>
     </tr> 
