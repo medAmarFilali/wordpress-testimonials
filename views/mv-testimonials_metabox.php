@@ -1,4 +1,5 @@
 <table class="form-table mv-testimonials-metabox"> 
+    <input type="hidden" name="mv_testimonials_nonce"  value="<?= wp_create_nonce('mv_testimonials_nonce') ?>" >
     <tr>
         <th>
             <label for="mv_testimonials_occupation"><?php esc_html_e( 'User occupation', 'mv-testimonials' ); ?></label>
