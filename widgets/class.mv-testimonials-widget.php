@@ -18,6 +18,10 @@ class MV_Testimonials_Widget extends WP_Widget{
             register_widget( 'MV_Testimonials_Widget' );
         } );
 
+        if( is_active_widget( false, false, $this->id_base ) ){
+            add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+        }
+
     }
 
     public function form( $instance ){
@@ -57,8 +61,28 @@ class MV_Testimonials_Widget extends WP_Widget{
     }
 
     public function widget( $args, $instance ){
+        $default_title = "MV Testimonials";
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
+        $number = ! empty ( $instance['number'] ) ? $instance['number'] : 5;
+        $image = isset( $instance['image'] ) ? $instance['image'] : false;
+        $occupation = isset( $instance['occupation'] ) ? $instance['occupation'] : false;
+        $company = isset( $instance['company'] ) ? (bool) $instance['company'] : false;
 
+        
+
+        echo $args['before_widget'];
+
+            echo $args['before_title'] . $title . $args['after_title'];
+            require( MV_TESTIMONIALS_PATH . 'views/mv-testimonials_widget.php' );
+
+        echo $args['after_widget'];
     }
+
+    public function enqueue(){
+        wp_enqueue_style( 'mv-testimonials-style-css', MV_TESTIMONIALS_URL . 'assets/css/frontend.css', array(), MV_TESTIMONIALS_VERSION, 'all' );
+    }
+
+    
 
     public function update( $new_instance, $old_instance ){
         $instance = $old_instance;
